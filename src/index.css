@@ -3,9 +3,78 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-gray-100;
+  html {
+    scroll-behavior: smooth;
   }
+  
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  /* Light theme */
+  .light {
+    @apply bg-white text-gray-900;
+  }
+
+  /* Dark theme */
+  .dark {
+    @apply bg-gray-900 text-white;
+  }
+
+  /* Neon theme */
+  .neon {
+    @apply bg-black text-white;
+  }
+
+  .neon body {
+    background: linear-gradient(45deg, #000000, #1a0033, #330066);
+  }
+
+  .neon .bg-white {
+    @apply bg-gray-900;
+  }
+
+  .neon .text-gray-900 {
+    @apply text-white;
+  }
+
+  .neon .border-gray-200 {
+    @apply border-pink-500/30;
+  }
+
+  .neon .shadow-lg {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+  }
+
+  .neon .bg-gradient-to-r {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6, #06b6d4);
+  }
+}
+
+@layer components {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
 }
 
 /* Print styles */
@@ -27,4 +96,53 @@
     page-break-after: always;
     break-after: page;
   }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
